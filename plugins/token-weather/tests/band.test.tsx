@@ -9,3 +9,10 @@ test('the band shows after a turn', async ($, on) => {
   expect(t?.text).toBe('☂ Showers')
   await ui.unmount()
 })
+
+test('the band reads the live window before any turn is recorded', async ($, on) => {
+  on('session.usage', () => ({ value: { startedAt: 0, rateLimits: [], context: { tokens: 190000, window: 200000 } } }))
+  const ui = await $.ui.mount({ plugin: 'token-weather', component: 'AbovePrompt', surface: 'terminal', props: { hasSurvey: false, isWorking: false, maxRows: 3 } } as never)
+  expect((await ui.find({ type: 'Text', text: /Compact/ }))?.text).toBe('↯ Compact soon')
+  await ui.unmount()
+})

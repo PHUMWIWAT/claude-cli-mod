@@ -1,1 +1,1 @@
-{ "name": "token-weather", "version": "0.1.1", "license": "MIT", "description": "A live weather forecast of your context window in the band above the prompt", "types": "./types/index.d.ts" }
+{ "name": "token-weather", "version": "0.1.2", "license": "MIT", "description": "A live weather forecast of your context window in the band above the prompt", "types": "./types/index.d.ts" }

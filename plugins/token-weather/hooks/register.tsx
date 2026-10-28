@@ -19,8 +19,8 @@ export const register: Register = on => {
   on('turn.complete', async ($, e, next) => {
     const result = await next(e)
     const { context } = await $.session.usage()
-    if (context.tokens !== undefined) {
-      const tokens = context.tokens
+    const tokens = context.tokens ?? (context.percent !== undefined ? Math.round((context.percent / 100) * context.window) : undefined)
+    if (tokens !== undefined) {
       await update($, history, prev => [...prev, tokens].slice(-12))
       await update($, window, () => context.window)
     }
@@ -28,13 +28,16 @@ export const register: Register = on => {
   })
 
   on('ui.render', { component: 'AbovePrompt' }, async ($, e, next) => {
-    const turns = await read($, history)
-    const size = await read($, window)
-    if (e.props.hasSurvey || turns.length === 0 || size === 0) {
+    const { context } = await $.session.usage()
+    const size = context.window || (await read($, window))
+    const stored = await read($, history)
+    const live = context.tokens ?? stored[stored.length - 1]
+    if (e.props.hasSurvey || live === undefined || size === 0) {
       return next(e)
     }
 
-    const tokens = turns[turns.length - 1]
+    const turns = stored.length > 0 && stored[stored.length - 1] === live ? stored : [...stored, live].slice(-12)
+    const tokens = live
     const percent = Math.round((tokens / size) * 100)
     const { icon, word, color } = forecast(percent)
     const chart = turns.map(t => BARS[Math.min(7, Math.floor((t / size) * 8))]).join('')
