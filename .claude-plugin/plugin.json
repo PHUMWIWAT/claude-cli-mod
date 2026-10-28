@@ -1,0 +1,1 @@
+{ "name": "tool-tracker", "version": "0.1.0", "license": "MIT", "description": "Shows tool-call counts in the status line and toasts when a tool fails" }

@@ -1,0 +1,5 @@
+{
+  "name": "claude-cli-mod",
+  "owner": { "name": "PHUMWIWAT" },
+  "plugins": [{ "name": "tool-tracker", "source": "./" }]
+}
