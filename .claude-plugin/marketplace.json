@@ -1,9 +1,21 @@
 {
   "name": "claude-cli-mod",
   "description": "Claude Code mods by PHUMWIWAT",
-  "owner": { "name": "PHUMWIWAT" },
+  "owner": {
+    "name": "PHUMWIWAT"
+  },
   "plugins": [
-    { "name": "tool-tracker", "source": "./plugins/tool-tracker" },
-    { "name": "token-weather", "source": "./plugins/token-weather" }
+    {
+      "name": "tool-tracker",
+      "source": "./plugins/tool-tracker"
+    },
+    {
+      "name": "token-weather",
+      "source": "./plugins/token-weather"
+    },
+    {
+      "name": "dev-hud",
+      "source": "./plugins/dev-hud"
+    }
   ]
 }

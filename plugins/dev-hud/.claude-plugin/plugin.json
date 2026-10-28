@@ -1,0 +1,1 @@
+{ "name": "dev-hud", "version": "0.1.0", "license": "MIT", "description": "Model, effort level, last turn time, session cost and uptime in the status line" }
