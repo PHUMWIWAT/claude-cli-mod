@@ -21,24 +21,24 @@ export const register: Register = on => {
     const { context } = await $.session.usage()
     if (context.tokens !== undefined) {
       const tokens = context.tokens
-      await update($, history, h => [...h, tokens].slice(-12))
+      await update($, history, prev => [...prev, tokens].slice(-12))
       await update($, window, () => context.window)
     }
     return result
   })
 
   on('ui.render', { component: 'AbovePrompt' }, async ($, e, next) => {
-    const h = await read($, history)
+    const turns = await read($, history)
     const size = await read($, window)
-    if (e.props.hasSurvey || h.length === 0 || size === 0) {
+    if (e.props.hasSurvey || turns.length === 0 || size === 0) {
       return next(e)
     }
 
-    const tokens = h[h.length - 1]
+    const tokens = turns[turns.length - 1]
     const percent = Math.round((tokens / size) * 100)
     const { icon, word, color } = forecast(percent)
-    const chart = h.map(t => BARS[Math.min(7, Math.floor((t / size) * 8))]).join('')
-    const added = h.length > 1 ? tokens - h[h.length - 2] : tokens
+    const chart = turns.map(t => BARS[Math.min(7, Math.floor((t / size) * 8))]).join('')
+    const added = turns.length > 1 ? tokens - turns[turns.length - 2] : tokens
     const { Box, Text } = $.ui.resolve(e)
 
     return (
