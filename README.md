@@ -1,23 +1,10 @@
-# tool-tracker
+# claude-cli-mod
 
-A Claude Code mod that counts every tool call in the current session and shows the total, plus how many failed, in the status line (`🔧 12 tools · ❌ 1 failed`). When a tool call fails, a toast pops up naming the tool, so you notice errors right away without scrolling back through the transcript.
+Claude Code mods. Install any of them at the prompt of a Claude Code terminal session (answer `y` to add the marketplace, then pick a scope):
 
-## Install
+| Mod | What it does | Install |
+| --- | --- | --- |
+| [tool-tracker](plugins/tool-tracker) | Tool-call and failure counts in the status line; a toast when a tool fails | `/plugin install tool-tracker --marketplace PHUMWIWAT/claude-cli-mod` |
+| [token-weather](plugins/token-weather) | A weather forecast of your context window above the prompt, with a 12-turn sparkline | `/plugin install token-weather --marketplace PHUMWIWAT/claude-cli-mod` |
 
-At the prompt of a Claude Code terminal session:
-
-```
-/plugin install tool-tracker --marketplace PHUMWIWAT/claude-cli-mod
-```
-
-Answer `y` to add the marketplace, then pick a scope (user is first).
-
-From a shell:
-
-```
-claude plugin install tool-tracker --marketplace PHUMWIWAT/claude-cli-mod
-```
-
-In the desktop app: click + next to the prompt box, then Plugins, Add marketplace with `PHUMWIWAT/claude-cli-mod`, then Add plugin.
-
-No configuration needed. The counts reset each session.
+From a shell, use `claude plugin install <mod> --marketplace PHUMWIWAT/claude-cli-mod`.
